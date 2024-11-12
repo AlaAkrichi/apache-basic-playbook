@@ -1,0 +1,7 @@
+ServerName {{ ansible_hostname }}
+Listen {{ apache_webserver_port }}
+<VirtualHost *:{{ apache_webserver_port }}>
+    DocumentRoot /var/www/html
+    ErrorLog /var/log/httpd/error.log
+    CustomLog /var/log/httpd/access.log combined
+</VirtualHost>

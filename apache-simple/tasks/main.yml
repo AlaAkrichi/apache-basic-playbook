@@ -1,0 +1,26 @@
+---
+# tasks file for apache-simple
+- name: Installer les paquets apache
+  package: 
+    name: "{{item}}"
+    state: present
+  loop:
+    - apache2
+    - libapache2-mod-wsgi-py3
+  notify: Redemarrer le service Apache
+- name: installer mod_wsgi pour python3
+  apt:
+    name: libapache2-mod-wsgi-py3
+    state: present
+    update_cache: yes
+- name: Copier le fichier de config httpd
+  template:
+    src:  '../templates/httpd.conf.j2'
+    dest: '/etc/apache2/apache2.conf'
+    mode: '0664'
+  notify: Redemarrer le service Apache
+- name: copier la page d'accueil
+  template:
+    src: '../templates/index.html.j2'
+    dest: '/var/www/html/index.html'  
+    mode: '0664'

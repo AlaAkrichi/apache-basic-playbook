@@ -1,0 +1,7 @@
+---
+# defaults file for apache-simple
+apache_test_message: "Ceci est un message de test"
+apache_webserver_port: 80
+httpd_packages: 
+  - apache2
+  - python3-mod_wsgi
